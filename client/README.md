@@ -1,4 +1,4 @@
-**Note: After downloading the files, do "npm install" command in your console**
+# Note: After downloading the files, do "npm install" command in your console
 
 # Getting Started with Create React App
 
