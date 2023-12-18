@@ -1,0 +1,58 @@
+@host = http://127.0.0.1:5000/
+
+### Create a user
+POST {{host}}/create_user
+Content-Type: application/json
+
+{
+    "username": "test12356151",
+    "password": "admin123",
+    "email": "gg@ez.com"
+}
+
+### Authenticate a user
+POST {{host}}/authenticate_user
+Content-Type: application/json
+
+{
+    "username": "qwe",
+    "password": "qwew"
+}
+
+### Create a task
+POST {{host}}/create_task
+Content-Type: application/json
+
+{
+    "user_id": 1,
+    "category_id": 2,
+    "task_name": "IM Project",
+    "description": "This is a task description.",
+    "due_date": "2023-12-21"
+}
+
+
+### Get all tasks
+GET {{host}}/get_AllTasks
+Content-Type: application/json
+
+
+
+### Get specific user
+GET {{host}}/users/1
+Content-Type: application/json
+
+### Update a user
+PUT {{host}}/users/1
+
+Content-Type: application/json
+{
+    "Name": "Admin",
+    "email": "admin@local.com",
+    "username": "admin",
+    "password": "123"
+}
+### Delete a user
+DELETE {{host}}/users/1
+Content-Type: application/json
+
