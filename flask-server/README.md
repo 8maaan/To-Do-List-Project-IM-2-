@@ -1,3 +1,5 @@
+## Note: The .venv folder and its contents are purposely added in the .gitignore file. Please install it manually.
+
 Installation Instructions (Windows)
 
 Reference: https://flask.palletsprojects.com/en/3.0.x/installation/
