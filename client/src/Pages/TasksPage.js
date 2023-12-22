@@ -2,11 +2,13 @@ import "../PagesCSS/Global.css"
 import "../PagesCSS/TasksPage.css"
 import React, { useEffect, useState } from 'react';
 import { getAllTasks } from '../API-Services/apiServices';
-import { Button, FormControl, IconButton, InputLabel, MenuItem, Select, TextField, Typography } from '@mui/material';
+import { Button, FormControl, IconButton, InputLabel, MenuItem, Select, TextField } from '@mui/material';
 import { createTasks } from "../API-Services/apiServices";
 import AssignmentIcon from '@mui/icons-material/Assignment';
 import EditIcon from '@mui/icons-material/Edit';
 import CancelIcon from '@mui/icons-material/Cancel';
+import CheckCircleIcon from '@mui/icons-material/CheckCircle';
+import TaskModal from "../ModalComponent/UpdateTaskModal";
 
 
 const TaskTextField = ({name, label, type, onChange}) =>{
@@ -18,10 +20,12 @@ const TaskTextField = ({name, label, type, onChange}) =>{
 }
 
 export default function TasksPage() {
-  const [task, setTask] = useState([{}]);
+  // Functions and components for Create Task container
+  const [task, setTask] = useState([]);
+  const [uid] = useState(parseInt(localStorage.getItem("uid")));
 
   const [createTask, setCreateTask] = useState({
-    user_id: 1,
+    user_id: uid,
     category_id: "",
     task_name: "",
     description: "",
@@ -40,24 +44,49 @@ export default function TasksPage() {
     const getData = async () => {
       const result = await getAllTasks();
       if (result.success) {
-        setTask(result.apiResponse);
-        console.log(result.success);
+        const filteredTasks = result.apiResponse.filter(apiResponse => 
+          apiResponse.user_id === uid
+        );
+        setTask(filteredTasks);
+        console.log(result.message);
       } else {
         console.log(result.message);
       }
     };
     getData();
-  }, []);
+  }, [uid]);
+
+  const clearFields = () =>{
+    setCreateTask({
+      category_id: "",
+      task_name: "",
+      description: "",
+      due_date: ""
+    })  
+  }
 
   const handleOnSubmit = async () => {
     console.log(createTask);
     const insertTask = await createTasks(createTask);
     if(insertTask.success){
       alert(insertTask.message);
+      clearFields();
     }else{
       alert(insertTask.message);
     }
   };
+
+  // Functions and components for ToDo List container
+  const [openModal, setOpenModal] = useState(false);
+  const [currentTask, setCurrentTask] = useState(null)
+  
+  const handleOnEdit = (task) =>{
+    console.log(task);
+    setOpenModal(true);
+    setCurrentTask(task)
+  }
+  
+
 
   return (
     <div className="bg">
@@ -65,7 +94,7 @@ export default function TasksPage() {
         <div className="create-task-container">
           <p style={{marginTop:'10%'}}>Create Task</p>
           <FormControl style={{width:'225px', marginTop:'15px'}} size="small">
-            <InputLabel id="demo-simple-select-label">Categories</InputLabel>
+            <InputLabel id="demo-simple-select-label">Category</InputLabel>
             <Select
               name="category_id"
               size="small"
@@ -87,8 +116,16 @@ export default function TasksPage() {
             <TaskTextField name={"task_name"} value={createTask.task_name} label={"Task Name"} onChange={handleInputChange}/>
             <TaskTextField name={"description"} value={createTask.description} label={"Description"} onChange={handleInputChange}/>
 
-            <TextField name="due_date" value={createTask.due_date} size="small" label="Due Date" InputLabelProps={{ shrink: true }} 
-              style={{marginTop:'15px', marginBottom:'10px'}} type="date" onChange={handleInputChange}/> 
+            <TextField
+              name="due_date"
+              value={createTask.due_date}
+              size="small"
+              label="Due Date"
+              InputLabelProps={{ shrink: true }}
+              style={{ marginTop: '15px', marginBottom: '10px' }}
+              type="datetime-local"
+              onChange={handleInputChange}
+            />
 
           </FormControl>
           <br></br>
@@ -110,19 +147,29 @@ export default function TasksPage() {
                 <p>Due Date: {task.due_date}</p>
               </div>
 
-              <div className="task-action-buttons">
-                <IconButton>
-                  <EditIcon/>
-                </IconButton>
+              <div className="task-action-buttons-container">
+                <div className="task-action-buttons">
+                  <IconButton size="small" color="primary">
+                    <CheckCircleIcon/>
+                  </IconButton>
 
-                <IconButton>
-                  <CancelIcon/>
-                </IconButton>
-                
+                  <IconButton size="small" color="primary" onClick={()=>{handleOnEdit(task)}}>
+                    <EditIcon/>
+                  </IconButton>
+
+                  <IconButton size="small" color="primary">
+                    <CancelIcon/>
+                  </IconButton> 
+                </div>              
               </div>
-
             </div>
           ))}
+          {currentTask && 
+            <TaskModal 
+              open={openModal}
+              onClose={() => { setCurrentTask(null); setOpenModal(false)}}
+              currentTask={currentTask}/>
+          }
         </div>
       </div>
     </div>

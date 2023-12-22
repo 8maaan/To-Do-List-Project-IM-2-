@@ -15,8 +15,8 @@ POST {{host}}/authenticate_user
 Content-Type: application/json
 
 {
-    "username": "qwe",
-    "password": "qwew"
+    "username": "usertest",
+    "password": "12345"
 }
 
 ### Create a task

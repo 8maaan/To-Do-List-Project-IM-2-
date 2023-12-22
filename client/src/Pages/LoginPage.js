@@ -33,6 +33,7 @@ export default function LoginPage() {
   const handleSubmit = async () =>{
     const authenticate = await authenticateUser(loginCredentials);
     if(authenticate.success){
+      localStorage.setItem("uid", authenticate.uid)
       alert(authenticate.message);
       setTimeout(() => {
         navigateTo("/taskspage")

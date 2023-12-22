@@ -15,9 +15,7 @@ function App() {
             <Route path="/taskspage" element={<TasksPage />} /> 
           </Route>
         </Routes>
-      </BrowserRouter>
-      
-      
+      </BrowserRouter>    
     </div>
   );
 }

@@ -1,4 +1,4 @@
--- TABLES --
+--- TABLES ---
 
 CREATE TABLE `users` (
   `user_id` int NOT NULL AUTO_INCREMENT,
@@ -8,6 +8,7 @@ CREATE TABLE `users` (
   PRIMARY KEY (`user_id`)
 ) ENGINE=InnoDB;
 
+
 CREATE TABLE `tasks` (
   `task_id` int NOT NULL AUTO_INCREMENT,
   `user_id` int DEFAULT NULL,
@@ -15,13 +16,14 @@ CREATE TABLE `tasks` (
   `task_name` varchar(255) NOT NULL,
   `description` text,
   `due_date` date DEFAULT NULL,
-  `is_completed` tinyint(1) DEFAULT '0',
+  `status` varchar(20) DEFAULT 'In progress',
   PRIMARY KEY (`task_id`),
   KEY `user_id` (`user_id`),
   KEY `category_id` (`category_id`),
   CONSTRAINT `tasks_ibfk_1` FOREIGN KEY (`user_id`) REFERENCES `users` (`user_id`),
   CONSTRAINT `tasks_ibfk_2` FOREIGN KEY (`category_id`) REFERENCES `task_categories` (`category_id`)
 ) ENGINE=InnoDB;
+
 
 CREATE TABLE `task_categories` (
   `category_id` int NOT NULL AUTO_INCREMENT,
@@ -31,7 +33,7 @@ CREATE TABLE `task_categories` (
 
 -----------------------------------------
 
--- STORED PROCEDURES --
+--- STORED PROCEDURES ---
 
 -- Creating a user
 DELIMITER $$$
@@ -68,7 +70,8 @@ END $$$
 
 DELIMITER ;
 
--- Creating a task
+
+-- Creating a task --
 DELIMITER $$$
 
 CREATE PROCEDURE create_task(
@@ -76,7 +79,7 @@ CREATE PROCEDURE create_task(
     IN p_category_id INT,
     IN p_task_name VARCHAR(255),
     IN p_description TEXT,
-    IN p_due_date DATE,
+    IN p_due_date DATETIME,
 )
 BEGIN
     -- Insert the new task
@@ -89,7 +92,7 @@ END $$$
 
 DELIMITER ;
 
--- Read/View tasks
+-- Read/View tasks --
 CREATE VIEW task_view AS
 SELECT
     t.task_id,
@@ -110,6 +113,8 @@ FROM
 
 DELIMITER $$$
 
+
+-- Verify user
 CREATE PROCEDURE user_authenticate(
     IN p_username VARCHAR(50),
     IN p_password VARCHAR(255)

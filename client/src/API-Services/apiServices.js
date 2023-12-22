@@ -44,13 +44,13 @@ export const authenticateUser = async (loginCredentials) => {
     const response = await axios.post("http://127.0.0.1:5000/authenticate_user", loginCredentials);
     const result = response.data.result;
 
-    console.log("Result:", result); // Add this line to check the type of result
+    // console.log("Result:", result); // Add this line to check the type of result
 
     if (result.message.includes("Invalid")) {
-      return { success: false, message: result.message };
+      return { success: false, message: result.message};
     }
 
-    return { success: true, message: result.message };
+    return { success: true, message: result.message, uid: result.uid};
   } catch (error) {
     return { success: false, message: `${error}` };
   }
