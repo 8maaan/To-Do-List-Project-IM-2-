@@ -15,7 +15,7 @@ CREATE TABLE `tasks` (
   `task_name` varchar(255) NOT NULL,
   `description` text,
   `due_date` date DEFAULT NULL,
-  `is_completed` tinyint(1) DEFAULT '0',
+  `status` tinyint(1) DEFAULT '0',
   PRIMARY KEY (`task_id`),
   KEY `user_id` (`user_id`),
   KEY `category_id` (`category_id`),
@@ -76,7 +76,7 @@ CREATE PROCEDURE create_task(
     IN p_category_id INT,
     IN p_task_name VARCHAR(255),
     IN p_description TEXT,
-    IN p_due_date DATE,
+    IN p_due_date DATE
 )
 BEGIN
     -- Insert the new task
@@ -110,7 +110,7 @@ FROM
 
 DELIMITER $$$
 
-CREATE PROCEDURE user_authenticate(
+CREATE PROCEDURE authenticate_user(
     IN p_username VARCHAR(50),
     IN p_password VARCHAR(255)
 )
@@ -135,3 +135,29 @@ BEGIN
 END $$$
 
 DELIMITER ;
+
+-- Deleting task
+DELIMITER $$$
+CREATE PROCEDURE delete_task(
+    IN task_id_todelete INT
+)
+BEGIN
+    DELETE FROM tasks WHERE task_id = task_id_todelete;
+END$$$
+DELIMITER ;
+
+-- STUDIO TRIGGER --
+
+--Delete all associated task
+DELIMITER $$$
+
+CREATE TRIGGER before_delete_user
+BEFORE DELETE ON users FOR EACH ROW
+BEGIN
+  -- Delete tasks associated with the user being deleted
+  DELETE FROM tasks WHERE user_id = OLD.user_id;
+END;
+$$$
+
+DELIMITER ;
+
