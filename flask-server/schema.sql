@@ -16,7 +16,7 @@ CREATE TABLE `tasks` (
   `task_name` varchar(255) NOT NULL,
   `description` text,
   `due_date` date DEFAULT NULL,
-  `is_completed` tinyint(1) DEFAULT '0',
+  `status` varchar(20) DEFAULT 'In progress',
   PRIMARY KEY (`task_id`),
   KEY `user_id` (`user_id`),
   KEY `category_id` (`category_id`),
@@ -79,7 +79,7 @@ CREATE PROCEDURE create_task(
     IN p_category_id INT,
     IN p_task_name VARCHAR(255),
     IN p_description TEXT,
-    IN p_due_date DATE,
+    IN p_due_date DATETIME,
 )
 BEGIN
     -- Insert the new task
@@ -113,6 +113,8 @@ FROM
 
 DELIMITER $$$
 
+
+-- Verify user
 CREATE PROCEDURE user_authenticate(
     IN p_username VARCHAR(50),
     IN p_password VARCHAR(255)
@@ -163,4 +165,3 @@ END;
 $$$
 
 DELIMITER ;
-
