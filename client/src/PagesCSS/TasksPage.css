@@ -4,7 +4,7 @@
     justify-content: center;
     align-items: center;
     width: 80%;
-    min-height: 100vh;
+    /* min-height: 100vh; */
     /* border: solid black; */
 }
 
@@ -12,6 +12,7 @@
     border: solid #D2D2D2 1px;
     border-radius: 10px;
     width: 40%;
+    min-width: fit-content;
     height: 450px;
     margin: 1%;   
     background-color: white;
@@ -32,7 +33,7 @@
     /* border: solid black 1px; */
     border-radius: 10px;
     width: 60%;
-    height: 100vh;
+    height: 90vh;
     overflow: auto;
 }
 
@@ -43,7 +44,7 @@
     align-items: center;
     margin-bottom: 15px;
     width: 80%;
-    border-bottom: solid #D3D3D3 1px;
+    border-bottom: solid #D3D3D3 3px;
     height: 70px;
     padding-bottom: 20px;
 }

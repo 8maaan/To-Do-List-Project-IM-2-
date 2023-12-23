@@ -142,7 +142,7 @@ export default function TasksPage() {
 
           </FormControl>
           <br></br>
-          <Button variant="contained" onClick={()=>{handleOnSubmit()}}>Submit</Button>  
+          <Button variant="contained" onClick={()=>{handleOnSubmit()}} style={{width:'225px'}}>Submit</Button>  
         </div>
 
         <div className="show-tasks-container">

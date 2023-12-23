@@ -187,7 +187,6 @@ CREATE PROCEDURE remove_task(
 )
 BEGIN
     DECLARE task_exists INT;
-    DECLARE task_name VARCHAR(255);
 
     -- Check if task_id exists
     SELECT COUNT(*) INTO task_exists FROM tasks WHERE task_id = task_id_toremove;
