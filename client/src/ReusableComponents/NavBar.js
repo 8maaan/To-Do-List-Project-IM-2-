@@ -3,6 +3,8 @@ import "../ReusableComponentsCSS/NavBar.css"
 import { Link, useNavigate } from 'react-router-dom';
 import {  Divider, Menu, MenuItem, } from '@mui/material';
 import LogoutIcon from '@mui/icons-material/Logout';
+import AccountCircleIcon from '@mui/icons-material/AccountCircle';
+import HistoryIcon from '@mui/icons-material/History';
 
 const NavBar = () => {
     const [uid] = useState(parseInt(localStorage.getItem("uid")));
@@ -58,7 +60,7 @@ const NavBar = () => {
         <div className="banner-container">
             <div className="first-navi-main">
                 <div className='navi-left'>
-                    <h1>ToDoDis</h1>
+                    <h2>ToDoDis</h2>
                     <Link to='/taskspage'><h3>Home</h3></Link>
                     {/* <Link to='/history'><h3>History</h3></Link> */}
                 </div>
@@ -104,19 +106,29 @@ const NavBar = () => {
                                 transformOrigin={{ horizontal: 'right', vertical: 'top' }}
                                 anchorOrigin={{ horizontal: 'right', vertical: 'bottom' }}
                             >
+                                <Link to ='/profile'>
+                                    <MenuItem onClick={handleClose}>
+                                        <AccountCircleIcon style={{fill: "#0075BE"}}/>  &nbsp; 
+                                        Profile
+                                    </MenuItem>
+                                </Link>
+
                                 <Link to ='/history'>
                                     <MenuItem onClick={handleClose}>
                                         {/* <AccountCircleIcon style={{fill: "#0075BE"}}/>  &nbsp;  */}
+                                        <HistoryIcon style={{fill: "#0075BE"}}/>  &nbsp; 
                                         Task History
                                     </MenuItem>
-
                                 </Link>
+
                                 {/* <Link to ='/transactions'>
                                     <MenuItem onClick={handleClose}>
                                         <PaidIcon style={{fill: "#0075BE"}}/>  &nbsp; Transactions
                                     </MenuItem>
                                 </Link> */}
+
                                 <Divider/>
+                                
                                 <MenuItem onClick={()=>{handleClose(); handleLogOut();}}>
                                     <LogoutIcon style={{fill: "#0075BE"}}/>  &nbsp; Logout
                                 </MenuItem>
