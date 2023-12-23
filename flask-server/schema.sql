@@ -79,7 +79,7 @@ CREATE PROCEDURE create_task(
     IN p_category_id INT,
     IN p_task_name VARCHAR(255),
     IN p_description TEXT,
-    IN p_due_date DATETIME,
+    IN p_due_date DATETIME
 )
 BEGIN
     -- Insert the new task
@@ -115,7 +115,7 @@ DELIMITER $$$
 
 
 -- Verify user
-CREATE PROCEDURE user_authenticate(
+CREATE PROCEDURE authenticate_user(
     IN p_username VARCHAR(50),
     IN p_password VARCHAR(255)
 )
@@ -130,7 +130,7 @@ BEGIN
     -- Check if the username exists and the password matches
     IF hashed_password IS NOT NULL AND hashed_password = p_password THEN
         -- Authentication successful, return the user_id and message
-        SELECT user_id AS id, 'Authentication successful.' AS message
+        SELECT user_id AS uid, 'Authentication successful.' AS message
         FROM users
         WHERE username = p_username;
     ELSE
@@ -143,11 +143,22 @@ DELIMITER ;
 
 -- Deleting task
 DELIMITER $$$
-CREATE PROCEDURE delete_task(
-    IN task_id_todelete INT
+CREATE PROCEDURE update_task_status(
+    IN task_id_todelete INT,
+    IN new_status varchar(50)
 )
 BEGIN
-    DELETE FROM tasks WHERE task_id = task_id_todelete;
+    DECLARE task_exists INT;
+
+    -- Check if task_id exists
+    SELECT COUNT(*) INTO task_exists FROM tasks WHERE task_id = task_id_update;
+
+    -- If task_id exists, update the status, otherwise return a message
+    IF task_exists > 0 THEN
+        UPDATE tasks SET status = new_status WHERE task_id = task_id_update;
+    ELSE
+        SELECT 'Task ID does not exist' AS message;
+    END IF;
 END$$$
 DELIMITER ;
 

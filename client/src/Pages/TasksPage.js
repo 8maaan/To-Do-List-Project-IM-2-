@@ -9,6 +9,7 @@ import EditIcon from '@mui/icons-material/Edit';
 import CancelIcon from '@mui/icons-material/Cancel';
 import CheckCircleIcon from '@mui/icons-material/CheckCircle';
 import TaskModal from "../ModalComponent/UpdateTaskModal";
+import CanacelTaskModal from "../ModalComponent/CancelTaskModal";
 
 
 const TaskTextField = ({name, label, type, onChange}) =>{
@@ -78,7 +79,10 @@ export default function TasksPage() {
 
   // Functions and components for ToDo List container
   const [openModal, setOpenModal] = useState(false);
-  const [currentTask, setCurrentTask] = useState(null)
+  const [currentTask, setCurrentTask] = useState(null);
+  // for cancel
+  const [openModalCancel, setOpenModalCancel] = useState(false);
+  const [newTaskStatus, setNewTaskStatus] = useState("");
   
   const handleOnEdit = (task) =>{
     console.log(task);
@@ -86,7 +90,12 @@ export default function TasksPage() {
     setCurrentTask(task)
   }
   
-
+  const handleOnCancel = (task, newStatus) =>{
+    console.log(task.task_id + task.status);
+    setOpenModalCancel(true);
+    setCurrentTask(task);
+    setNewTaskStatus(newStatus);
+  }
 
   return (
     <div className="bg">
@@ -149,7 +158,7 @@ export default function TasksPage() {
 
               <div className="task-action-buttons-container">
                 <div className="task-action-buttons">
-                  <IconButton size="small" color="primary">
+                  <IconButton size="small" color="primary" onClick={()=>{handleOnCancel(task, "Completed")}}>
                     <CheckCircleIcon/>
                   </IconButton>
 
@@ -157,7 +166,7 @@ export default function TasksPage() {
                     <EditIcon/>
                   </IconButton>
 
-                  <IconButton size="small" color="primary">
+                  <IconButton size="small" color="primary" onClick={()=>{handleOnCancel(task, "Cancelled")}}>
                     <CancelIcon/>
                   </IconButton> 
                 </div>              
@@ -169,6 +178,13 @@ export default function TasksPage() {
               open={openModal}
               onClose={() => { setCurrentTask(null); setOpenModal(false)}}
               currentTask={currentTask}/>
+          }
+          {currentTask && 
+            <CanacelTaskModal 
+              open={openModalCancel}
+              onClose={() => { setCurrentTask(null); setOpenModalCancel(false)}}
+              currentTask={currentTask}
+              newTaskStatus={newTaskStatus}/>
           }
         </div>
       </div>

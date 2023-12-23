@@ -47,12 +47,12 @@ export default function RegisterPage() {
     <div className="bg">
       <div className="registerpage-container">
         <div className="registration-form-container">
-            <p>Registration Form</p>
+            <p>Sign Up</p>
             <RegisterTextFields name={"email"} value={user.email} label={"Email Address"} onChange={handleInputChange}/>
             <RegisterTextFields name={"username"} value={user.username} label={"Username"} onChange={handleInputChange}/>
             <RegisterTextFields name={"password"} value={user.password} label={"Password"} type={"password"} onChange={handleInputChange}/>
             <RegisterTextFields label={"Re-type Password"} type={"password"}/>
-            <Button variant="contained" sx={{marginTop:'5%', marginBottom:'3%'}} onClick={()=>{handleSubmit()}}>Submit</Button>
+            <Button variant="contained" sx={{marginTop:'2%', marginBottom:'3%'}} onClick={()=>{handleSubmit()}}>Submit</Button>
         </div>
       </div>
     </div>
