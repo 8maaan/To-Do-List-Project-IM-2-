@@ -1,0 +1,61 @@
+.show-tasks-container-history{
+    /* border: solid black 1px; */
+    border-radius: 10px;
+    width: 60%;
+    height: 90vh;
+    overflow: auto;
+    margin: auto;
+}
+
+.task-container-history{
+    margin: 0 auto;
+    display: flex;
+    justify-content: left;
+    align-items: center;
+    margin-bottom: 15px;
+    width: 80%;
+    border-bottom: solid #D3D3D3 3px;
+    height: 70px;
+    padding-bottom: 20px;
+}
+
+.assignment-icon-alignment-history{
+    margin-left: 10px;
+    margin-right: 10px;
+}
+
+.task-info-history{
+    display: block;
+    /* border: solid black 1px; */
+    /* border-left: solid black 1px; */
+    height: 70px;
+    width: 70%;
+    text-align: left;
+}
+
+.task-info-history p{
+    margin: 0; 
+    padding: 0; 
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    font-size: 13px;
+    margin-left: 10px;
+}
+
+.task-action-buttons-container-history{
+    height: 70px;
+    /* border: solid black 1px; */
+    /* border-left: solid black 1px; */
+    width: 25%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.task-action-buttons-history{
+    /* border: solid black 1px; */
+    /* height: 70px; */
+    display: flex;
+}
+
