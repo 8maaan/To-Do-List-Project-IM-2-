@@ -2,6 +2,7 @@
     margin: 0 auto;
     min-height: 100vh;
     display: flex;
+    flex-direction: column;
     justify-content: center;
     align-items: center;
     width: 50%;
@@ -10,11 +11,10 @@
 
 .registration-form-container{
     margin: 0 auto;
-    display: inline-block;
+    margin-top: auto;
+    margin-bottom: auto;
+    display: block;
     width: 100%;
-    border: solid gray 1px;
-    border-radius: 15px;
-    box-shadow: 1px 1px 1px 1px #888888;
 }
 
 .registration-form-container p{
@@ -26,4 +26,12 @@
 .registration-form-container .MuiTextField-root, .MuiButton-root{
     margin-top: 2%;
     width: 40%;
+}
+
+.footer-fetisher{
+    margin-top: auto;
+    border-top: 1px solid #D3D3D3;
+    width: 190%;
+    padding: 2% 75% 2% 75%;
+    box-sizing: border-box;
 }

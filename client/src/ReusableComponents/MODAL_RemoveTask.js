@@ -6,27 +6,6 @@ const CanacelTaskModal = ({ open, onClose, currentTask, newTaskStatus }) => {
     const [message, setMessage] = useState(
         newTaskStatus === 'Cancelled' ? 'cancel' : 'complete'
       );
-    // const [updateTask, setUpdateTask] = useState({
-    //     ...currentTask,
-    //     due_date: new Date(currentTask.due_date).toISOString().slice(0, 16),
-    // });
-
-  
-//   const handleInputChange = (e) => {
-//     const { name, value } = e.target;
-//     setUpdateTask(prevState => ({
-//       ...prevState,
-//       [name]: value,
-//     }));
-//   };
-
-
-//   const onClickSubmit = () =>{
-//     const now = new Date();
-//     const test = now.toISOString(updateTask.due_date).slice(0, 16);
-//     console.log(test);
-//     console.log(updateTask.due_date);
-//   }
 
   return (
     <Modal
@@ -38,52 +17,11 @@ const CanacelTaskModal = ({ open, onClose, currentTask, newTaskStatus }) => {
     >
       <Box className="modal-style">
         <div className="modal-content-container">
-            {/* <FormControl style={{marginTop:'15px', width:'60%'}} size="small">
-                <InputLabel id="demo-simple-select-label">Category</InputLabel>
-                <Select
-                    name="category_id"
-                    size="small"
-                    style={{textAlign:'left'}}
-                    labelId="demo-simple-select-label"
-                    label="Categories"
-                    value={updateTask.category_id}
-                    onChange={handleInputChange}         
-                >
-                    <MenuItem value={1}>Study</MenuItem>
-                    <MenuItem value={2}>Projects</MenuItem>
-                    <MenuItem value={3}>Homework</MenuItem>
-                    <MenuItem value={4}>Work</MenuItem>
-                    <MenuItem value={5}>Personal</MenuItem>
-                    <MenuItem value={6}>Shopping</MenuItem>
-                    <MenuItem value={7}>Health</MenuItem>
-                </Select>
-                <br></br>
-                <TextField name="task_name" label="Task Name" size="small" value={updateTask.task_name} onChange={handleInputChange}/>
-                <br></br>
-                <TextField name="description" label="Description" size="small" value={updateTask.description} onChange={handleInputChange}/>
-                <br></br>
-                <TextField 
-                    name="due_date" 
-                    label="Due Date" 
-                    size="small" 
-                    type="datetime-local" 
-                    InputLabelProps={{ shrink: true }} 
-                    value={updateTask.due_date} 
-                    onChange={handleInputChange}/>
-        
-            </FormControl>
-            <br></br>
-          <Button variant='contained' onClick={()=>{onClickSubmit()}}>Update Task</Button>
-          <br></br> */}
-
-          
-          {/* <p>{currentTask.task_name}</p>
-          <p>{newTaskStatus}</p> */}
-          <p>Do you want to {message} <span>{currentTask.task_name}</span>?</p>
+          <p>Do you want to {message} <span style={{fontWeight: '700'}}>{currentTask.task_name}</span>?</p>
 
           <div className='yes-no-bottons'>
             <Button variant='contained'>Yes</Button>
-            <Button variant='contained'>No</Button>
+            <Button variant='contained' onClick={onClose}>No</Button>
           </div>
         </div>
       </Box>

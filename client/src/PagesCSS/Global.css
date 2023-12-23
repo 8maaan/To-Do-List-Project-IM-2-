@@ -1,8 +1,12 @@
-.bg{
+/* .bg{
     min-height: 100vh;
     background-image: url("https://i.imgur.com/d7KrWEt.jpg");
     background-position: center;
     background-size: cover;
     background-repeat: no-repeat;
     background-attachment: fixed;
+} */
+
+.bg{
+    background-color: white;
 }

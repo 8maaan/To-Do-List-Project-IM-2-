@@ -142,7 +142,7 @@ export default function TasksPage() {
         </div>
 
         <div className="show-tasks-container">
-          <p style={{marginTop:'5.5%'}}>ToDo List</p>
+          <p style={{marginTop:'5.5%', fontWeight: '600', fontSize: '21px', color: '#494949'}}>ToDo List</p>
           {task.map((task, id) => (
             <div key={id} className="task-container">
               <div className="assignment-icon-alignment">
@@ -150,7 +150,7 @@ export default function TasksPage() {
               </div>
 
               <div className="task-info">
-                <p>{task.task_name}</p>
+                <p style={{fontWeight: '700'}}>{task.task_name}</p>
                 <p>Category: {task.category_name}</p>
                 <p>Description: {task.description}</p>
                 <p>Due Date: {task.due_date}</p>

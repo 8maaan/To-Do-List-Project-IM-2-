@@ -48,10 +48,14 @@ export default function LoginPage() {
     <div className="bg">
       <div className="registerpage-container">
         <div className="registration-form-container">
-            <p>Login Form</p>
+            <p>Log in</p>
             <LoginTextFields name={"username"} value={loginCredentials.username} label={"Username"} onChange={handleInputChange}/>
             <LoginTextFields name={"password"} value={loginCredentials.password} label={"Password"} onChange={handleInputChange} type={"password"}/>
-            <Button variant="contained" sx={{marginTop:'5%', marginBottom:'3%'}} onClick={()=>{handleSubmit()}}>Submit</Button>
+            <Button variant="contained" sx={{marginTop:'2%', marginBottom:'3%'}} onClick={()=>{handleSubmit()}}>Log in</Button>
+        </div>
+        <div className="footer-fetisher">
+          <p>Information Management 2 Final Project by John Randolf Ribo and John Carl Sabejon</p>
+          <p>CSIT327 Section G5 Handled by Sir Arthur Layese</p>
         </div>
       </div>
     </div>
