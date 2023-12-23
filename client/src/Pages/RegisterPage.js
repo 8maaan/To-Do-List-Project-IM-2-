@@ -4,6 +4,7 @@ import { Button, TextField} from '@mui/material';
 import { useState } from "react";
 import { createUser } from "../API-Services/apiServices";
 import { useNavigate } from "react-router-dom";
+import SnackbarComponent from "../ReusableComponents/SnackbarComponent";
 
 const RegisterTextFields = ({name, value, label, type, onChange}) =>{   
   return(
@@ -29,17 +30,34 @@ export default function RegisterPage() {
     });
   };
 
+  const [snackbar, setSnackbar] = useState(false);
+  const [snackbarSeverity, setSnackbarSeverity] = useState('');
+  const [snackbarMessage, setSnackbarMessage] = useState('');
+
+  const handleSnackbarOpen = (severity, message) => {
+    setSnackbarSeverity(severity);
+    setSnackbarMessage(message);
+    setSnackbar(true);
+  }
+
+  const handleSnackbarClose = (event, reason) => {
+    if (reason === 'clickaway') {
+      return;
+    }
+    setSnackbar(false);
+  };
+
   const navigateTo = useNavigate();
   const handleSubmit = async () =>{
     console.log(user);
     const insertUser = await createUser(user);
     if(insertUser.success){
-      alert(insertUser.message);
+      handleSnackbarOpen("success", insertUser.message);
       setTimeout(() => {
         navigateTo("/login")
       }, 2000);
     }else{
-      alert(insertUser.message);
+      handleSnackbarOpen("error", insertUser.message);
     }
   }
 
@@ -59,6 +77,7 @@ export default function RegisterPage() {
           <p>CSIT327 Section G5 Handled by Sir Arthur Layese</p>
         </div>
       </div>
+      {snackbar && <SnackbarComponent open={snackbar} onClose={handleSnackbarClose} severity={snackbarSeverity} message={snackbarMessage} />}
     </div>
   );
 }

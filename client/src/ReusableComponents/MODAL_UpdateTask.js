@@ -34,7 +34,7 @@ const MODAL_UpdateTaskModal = ({ open, onClose, currentTask }) => {
     if (reason === 'clickaway') {
       return;
     }
-    setSnackbar(true);
+    setSnackbar(false);
   };
 
   const [isLoading, setIsLoading] = useState(false);

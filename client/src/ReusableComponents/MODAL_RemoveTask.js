@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { Box, Button, FormControl, InputLabel, MenuItem, Modal, Select, TextField } from '@mui/material';
+import { Box, Button,  Modal } from '@mui/material';
 import "../PagesCSS/TasksPage.css"
 
 const CanacelTaskModal = ({ open, onClose, currentTask, newTaskStatus }) => {
