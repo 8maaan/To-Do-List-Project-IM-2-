@@ -113,6 +113,43 @@ FROM
 
 DELIMITER $$$
 
+-- Update a task --
+DELIMITER $$$
+
+CREATE PROCEDURE update_task(
+    IN p_task_id INT,
+    IN p_category_id INT,
+    IN p_task_name VARCHAR(255),
+    IN p_description TEXT,
+    IN p_due_date DATETIME
+)
+BEGIN
+    -- Check if the task with the specified ID exists
+    DECLARE task_exists INT DEFAULT 0;
+    SELECT COUNT(*) INTO task_exists FROM tasks WHERE task_id = p_task_id;
+
+    IF task_exists = 0 THEN
+        SELECT 'Task not found' AS message;
+
+    ELSE
+        -- Update the task
+        UPDATE tasks
+        SET
+            task_name = p_task_name,
+            description = p_description,
+            due_date = p_due_date,
+            category_id = p_category_id
+        WHERE task_id = p_task_id;
+
+        SELECT 'Task updated successfully.' AS message;
+    END IF;
+END $$$
+
+DELIMITER ;
+
+
+--
+
 
 -- Verify user
 CREATE PROCEDURE authenticate_user(

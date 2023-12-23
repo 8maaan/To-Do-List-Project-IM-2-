@@ -22,6 +22,21 @@ export const getAllTasks = async() => {
     }
 }
 
+export const updateTasks = async (task) => {
+  try {
+    const response = await axios.put("http://127.0.0.1:5000/update_task", task);
+    const result = response.data.result; // assuming the server sends { "result": "message" }
+    return { success: true, message: result };
+
+  } catch (error) {
+    console.error("Error:", error);
+    return { success: false, message: `${error}` };
+  }
+};
+
+
+
+// API for USER
 // Function for passing user registration info to /createUser API from server (flask)
 export const createUser = async (user) => {
     try {

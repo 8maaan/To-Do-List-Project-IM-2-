@@ -36,7 +36,17 @@ Content-Type: application/json
 GET {{host}}/get_AllTasks
 Content-Type: application/json
 
+### Update a task
+PUT  {{host}}/update_task
+Content-Type: application/json
 
+{
+    "task_id": 1,
+    "category_id": 5,
+    "task_name": "IM Project Wowzers",
+    "description": "This is a task description.",
+    "due_date": "2023-12-30T18:25"
+}
 
 ### Get specific user
 GET {{host}}/users/1

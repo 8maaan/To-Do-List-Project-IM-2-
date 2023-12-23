@@ -2,7 +2,7 @@ from flask import Flask, jsonify, request
 from flask_mysqldb import MySQL
 from database import set_connector
 from users import create_user, authenticate_user
-from tasks import create_task, get_AllTasks
+from tasks import create_task, get_AllTasks, update_task
 from flask_cors import CORS, cross_origin
 
 app = Flask(__name__)
@@ -52,4 +52,11 @@ def createTask():
 def getAllTasks():
   return jsonify(get_AllTasks())
 
+
+@app.route("/update_task", methods=["PUT"])
+def updateTask():
+  data = request.get_json()
+  result = update_task(data["task_id"], data["category_id"], 
+                       data["task_name"], data["description"], data["due_date"],)
+  return jsonify({"result": result})
 

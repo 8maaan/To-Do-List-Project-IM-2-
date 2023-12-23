@@ -8,8 +8,8 @@ import AssignmentIcon from '@mui/icons-material/Assignment';
 import EditIcon from '@mui/icons-material/Edit';
 import CancelIcon from '@mui/icons-material/Cancel';
 import CheckCircleIcon from '@mui/icons-material/CheckCircle';
-import TaskModal from "../ModalComponent/UpdateTaskModal";
-import CanacelTaskModal from "../ModalComponent/CancelTaskModal";
+import TaskModal from "../ReusableComponents/MODAL_UpdateTask";
+import CanacelTaskModal from "../ReusableComponents/MODAL_RemoveTask";
 
 
 const TaskTextField = ({name, label, type, onChange}) =>{
