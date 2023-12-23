@@ -180,23 +180,29 @@ DELIMITER ;
 
 -- Deleting task
 DELIMITER $$$
-CREATE PROCEDURE update_task_status(
-    IN task_id_todelete INT,
-    IN new_status varchar(50)
+
+CREATE PROCEDURE remove_task(
+    IN task_id_toremove INT,
+    IN new_status VARCHAR(50)
 )
 BEGIN
     DECLARE task_exists INT;
+    DECLARE task_name VARCHAR(255);
 
     -- Check if task_id exists
-    SELECT COUNT(*) INTO task_exists FROM tasks WHERE task_id = task_id_update;
+    SELECT COUNT(*) INTO task_exists FROM tasks WHERE task_id = task_id_toremove;
 
-    -- If task_id exists, update the status, otherwise return a message
+    -- If task_id exists, update the status and get the task name, otherwise return a message
     IF task_exists > 0 THEN
-        UPDATE tasks SET status = new_status WHERE task_id = task_id_update;
+        UPDATE tasks SET status = new_status WHERE task_id = task_id_toremove;
+        SELECT CONCAT('Task: ', task_name, ' successfully ' , new_status ) AS message
+        FROM tasks
+        WHERE task_id = task_id_toremove;
     ELSE
         SELECT 'Task ID does not exist' AS message;
     END IF;
-END$$$
+END $$$
+
 DELIMITER ;
 
 -- STUDIO TRIGGER --

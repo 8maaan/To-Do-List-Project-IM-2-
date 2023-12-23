@@ -17,3 +17,9 @@ def update_task(task_id, category_id, task_name, description, due_date):
   cursor = execute(query, (task_id, category_id, task_name, description, due_date))
   row = cursor.fetchone()
   return row["message"] 
+
+def remove_task(task_id, status):
+  query = "CALL remove_task (%s, %s)"
+  cursor = execute(query, (task_id, status))
+  row = cursor.fetchone()
+  return row["message"] 

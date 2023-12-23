@@ -2,7 +2,7 @@ from flask import Flask, jsonify, request
 from flask_mysqldb import MySQL
 from database import set_connector
 from users import create_user, authenticate_user
-from tasks import create_task, get_AllTasks, update_task
+from tasks import create_task, get_AllTasks, update_task, remove_task
 from flask_cors import CORS, cross_origin
 
 app = Flask(__name__)
@@ -26,7 +26,7 @@ set_connector(mysql)
 def hello_world():
     return "<p>Hello, World! :3</p>"
 
-# Routes for users
+### ROUTES FOR USERS ###
 @app.route("/create_user", methods=["POST"])
 def createUsers(): 
   data = request.get_json()
@@ -40,7 +40,9 @@ def authenticateUser():
   return jsonify({"result": result})
 
 
-# Routes for tasks
+### ROUTES FOR TASKS ###
+
+# CREATE TASK
 @app.route("/create_task", methods=["POST"])
 def createTask():
   data = request.get_json()
@@ -48,11 +50,13 @@ def createTask():
                        data["task_name"], data["description"], data["due_date"],)
   return jsonify({"result": result})
 
+# READ ALL TASKS
 @app.route("/get_AllTasks", methods=["GET"])
 def getAllTasks():
   return jsonify(get_AllTasks())
 
 
+# UPDATE TASK
 @app.route("/update_task", methods=["PUT"])
 def updateTask():
   data = request.get_json()
@@ -60,3 +64,9 @@ def updateTask():
                        data["task_name"], data["description"], data["due_date"],)
   return jsonify({"result": result})
 
+# DELETE (NOT REALLY) A TASK
+@app.route("/remove_task", methods=["PUT"])
+def removeTask():
+  data = request.get_json()
+  result = remove_task(data["task_id"], data["status"])
+  return jsonify({"result": result})

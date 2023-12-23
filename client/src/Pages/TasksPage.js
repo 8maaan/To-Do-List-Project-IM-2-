@@ -10,6 +10,8 @@ import CancelIcon from '@mui/icons-material/Cancel';
 import CheckCircleIcon from '@mui/icons-material/CheckCircle';
 import TaskModal from "../ReusableComponents/MODAL_UpdateTask";
 import CanacelTaskModal from "../ReusableComponents/MODAL_RemoveTask";
+import { useNavigate } from "react-router";
+import NavBar from "../ReusableComponents/NavBar"
 
 
 const TaskTextField = ({name, label, type, onChange}) =>{
@@ -57,21 +59,22 @@ export default function TasksPage() {
     getData();
   }, [uid]);
 
-  const clearFields = () =>{
-    setCreateTask({
-      category_id: "",
-      task_name: "",
-      description: "",
-      due_date: ""
-    })  
-  }
+  // const clearFields = () =>{
+  //   setCreateTask({
+  //     category_id: "",
+  //     task_name: " ",
+  //     description: " ",
+  //     due_date: ""
+  //   })  
+  // }
 
+  const navigateTo = useNavigate();
   const handleOnSubmit = async () => {
-    console.log(createTask);
+    // console.log(createTask);
     const insertTask = await createTasks(createTask);
     if(insertTask.success){
       alert(insertTask.message);
-      clearFields();
+      navigateTo(0);
     }else{
       alert(insertTask.message);
     }
@@ -85,13 +88,13 @@ export default function TasksPage() {
   const [newTaskStatus, setNewTaskStatus] = useState("");
   
   const handleOnEdit = (task) =>{
-    console.log(task);
+    // console.log(task);
     setOpenModal(true);
     setCurrentTask(task)
   }
   
   const handleOnCancel = (task, newStatus) =>{
-    console.log(task.task_id + task.status);
+    // console.log(task.task_id + task.status);
     setOpenModalCancel(true);
     setCurrentTask(task);
     setNewTaskStatus(newStatus);
@@ -99,6 +102,7 @@ export default function TasksPage() {
 
   return (
     <div className="bg">
+      <NavBar/>
       <div className="taskspage-container">
         <div className="create-task-container">
           <p style={{marginTop:'10%'}}>Create Task</p>
@@ -143,10 +147,10 @@ export default function TasksPage() {
 
         <div className="show-tasks-container">
           <p style={{marginTop:'5.5%', fontWeight: '600', fontSize: '21px', color: '#494949'}}>ToDo List</p>
-          {task.map((task, id) => (
+          {task.map((task, id) => (task.status === 'In progress' &&
             <div key={id} className="task-container">
               <div className="assignment-icon-alignment">
-                <AssignmentIcon fontSize="large"/>
+                <AssignmentIcon color="secondary" fontSize="large"/>
               </div>
 
               <div className="task-info">
@@ -158,7 +162,7 @@ export default function TasksPage() {
 
               <div className="task-action-buttons-container">
                 <div className="task-action-buttons">
-                  <IconButton size="small" color="primary" onClick={()=>{handleOnCancel(task, "Completed")}}>
+                  <IconButton size="small" color="success" onClick={()=>{handleOnCancel(task, "Completed")}}>
                     <CheckCircleIcon/>
                   </IconButton>
 
@@ -166,7 +170,7 @@ export default function TasksPage() {
                     <EditIcon/>
                   </IconButton>
 
-                  <IconButton size="small" color="primary" onClick={()=>{handleOnCancel(task, "Cancelled")}}>
+                  <IconButton size="small" color="error" onClick={()=>{handleOnCancel(task, "Cancelled")}}>
                     <CancelIcon/>
                   </IconButton> 
                 </div>              

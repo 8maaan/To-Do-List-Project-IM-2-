@@ -48,6 +48,16 @@ Content-Type: application/json
     "due_date": "2023-12-30T18:25"
 }
 
+### Remove a task
+PUT  {{host}}/remove_task
+Content-Type: application/json
+
+{
+    "task_id": 1,
+    "status": "Cancelled"
+}
+
+
 ### Get specific user
 GET {{host}}/users/1
 Content-Type: application/json
