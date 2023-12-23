@@ -19,6 +19,21 @@ Content-Type: application/json
     "password": "12345"
 }
 
+### Get all users
+GET {{host}}/get_users
+Content-Type: application/json
+
+### Update a user
+PUT  {{host}}/update_user
+Content-Type: application/json
+
+{
+    "user_id": 1,
+    "username": "proper_username",
+    "email": "admin@gmail.com",
+    "password": "123"
+}
+
 ### Create a task
 POST {{host}}/create_task
 Content-Type: application/json

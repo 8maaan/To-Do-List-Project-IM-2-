@@ -83,3 +83,29 @@ export const authenticateUser = async (loginCredentials) => {
     return { success: false, message: `${error}` };
   }
 };
+
+export const getUsers = async () => {
+  try{
+    const response = await axios.get("http://127.0.0.1:5000/get_users");
+    return {apiResponse: response.data, success: true, message: 'Successfully fetched data'}
+  }catch (error) {
+    throw new Error('Error, could not find user.', error);
+  }
+}
+
+export const updateUser = async (user) => {
+  try {
+    const response = await axios.put("http://127.0.0.1:5000/update_user", user);
+    const result = response.data.result; // assuming the server sends { "result": "message" }
+    console.log(result);
+    if (result.includes("must be")) {
+      return { success: false, message: result};
+    }
+
+    return { success: true, message: result};
+
+  } catch (error) {
+    console.error("Error:", error);
+    return { success: false, message: `${error}` };
+  }
+};

@@ -2,9 +2,7 @@ import "../PagesCSS/Global.css"
 import "../PagesCSS/TaskHistory.css"
 import React, { useEffect, useState } from 'react';
 import { getAllTasks } from '../API-Services/apiServices';
-import { Button, FormControl, IconButton, InputLabel, MenuItem, Select, TextField } from '@mui/material';
 import AssignmentIcon from '@mui/icons-material/Assignment';
-import { useNavigate } from "react-router";
 import NavBar from "../ReusableComponents/NavBar"
 
 export default function TaskHistoryPage(){

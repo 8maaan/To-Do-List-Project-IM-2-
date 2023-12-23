@@ -6,8 +6,8 @@ import LoadingComponent from './LoadingComponent';
 import SnackbarComponent from './SnackbarComponent';
 import { useNavigate } from 'react-router';
 
-const CanacelTaskModal = ({ open, onClose, currentTask, newTaskStatus }) => {
-  const [message, setMessage] = useState(
+const CancelTaskModal = ({ open, onClose, currentTask, newTaskStatus }) => {
+  const [message] = useState(
     newTaskStatus === 'Cancelled' ? 'cancel' : 'complete'
   );
 
@@ -66,7 +66,7 @@ const CanacelTaskModal = ({ open, onClose, currentTask, newTaskStatus }) => {
         <Box className="modal-style">
           <div className="modal-content-container">
             <p>Do you want to {message} the task <span style={{fontWeight: '700'}}>{currentTask.task_name}</span>?</p>
-
+            <br></br>
             <div className='yes-no-bottons'>
               <Button variant='contained' onClick={()=>{handleOnSubmit()}}>Yes</Button>
               <Button variant='contained' onClick={onClose}>No</Button>
@@ -80,4 +80,4 @@ const CanacelTaskModal = ({ open, onClose, currentTask, newTaskStatus }) => {
   );
 };
 
-export default CanacelTaskModal;
+export default CancelTaskModal;

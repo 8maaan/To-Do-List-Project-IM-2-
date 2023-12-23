@@ -106,7 +106,7 @@ const NavBar = () => {
                                 transformOrigin={{ horizontal: 'right', vertical: 'top' }}
                                 anchorOrigin={{ horizontal: 'right', vertical: 'bottom' }}
                             >
-                                <Link to ='/profile'>
+                                <Link to ='/profile-page'>
                                     <MenuItem onClick={handleClose}>
                                         <AccountCircleIcon style={{fill: "#0075BE"}}/>  &nbsp; 
                                         Profile

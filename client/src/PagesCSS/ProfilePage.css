@@ -1,0 +1,100 @@
+.profile-button {
+    width: 120px; 
+    margin: 15px; 
+}
+
+.profile-textfield {
+    width: 360px;
+}
+
+.profile-page-container{
+    min-height: 100vh;
+    background-color: #dedfe0;
+    width: 100%;
+}
+
+.profile-page-info-container{
+    margin: 0 auto;
+    margin-top: 30px;
+    width: 35%;
+    border: solid black 1px;
+    height: 65vh;
+    background-color: white;
+}
+
+.profile-info-section,
+.profile-photo-section{
+    display: flex;
+    justify-content: center;
+    align-items: center;   
+    /* border: solid black 1px; */
+    height: 15vh;
+}
+
+.profile-photo-section-container{
+    display: flex;
+    justify-content: left;
+    align-items: center;
+    /* border: solid black 1px; */
+    width: 90%;
+    height: 13vh;
+}
+
+.profile-photo-section-icon {
+    width: 120px;
+    height: 120px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border: solid black 1px;
+    border-radius: 50%;
+    background-image: url('https://imgflip.com/s/meme/Surprised-Koala.jpg');
+    background-size: cover; 
+    background-position: center; 
+    background-repeat: no-repeat; 
+}
+
+
+.profile-photo-section-button-container{
+    display: flex;
+    /* border: solid black 1px; */
+    margin-left: 15px;
+    margin-bottom: 10px;
+}
+
+.profile-photo-section-reminder {
+    margin-left: 15px;
+    text-align: left;
+    /* border: solid black 1px; */
+}
+.profile-info-section{
+    height: 30vh;
+}
+.profile-info-section-container{
+    text-align: left;
+    /* border: solid black 1px; */
+    width: 90%;
+    height: 30vh;
+}
+
+.profile-info-section-container p{
+    margin-bottom: 1%;
+    font-weight: 600;
+}
+
+.profile-delete-section{
+    margin: 0 auto;
+    width: 90%;
+    /* border: solid black 1px; */
+    text-align: left;
+}
+
+.profile-delete-section p{
+    margin-bottom: 1%;
+    margin-top: 5%;
+    font-weight: 600;
+}
+
+
+
+

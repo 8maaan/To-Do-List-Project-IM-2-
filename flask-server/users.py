@@ -10,6 +10,12 @@ def get_users():
   query = "SELECT * FROM users_view"
   cursor = execute(query)
   return cursor.fetchall()
+
+def update_user(user_id, username, email, password):
+  query = "CALL update_user (%s, %s, %s, %s)"
+  cursor = execute(query, (user_id, username, email, password))
+  row = cursor.fetchone()
+  return row["message"] 
   
 def authenticate_user(username, password):
   query = "CALL authenticate_user (%s, %s)"

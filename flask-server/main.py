@@ -1,7 +1,7 @@
 from flask import Flask, jsonify, request
 from flask_mysqldb import MySQL
 from database import set_connector
-from users import create_user, authenticate_user
+from users import create_user, authenticate_user, get_users, update_user
 from tasks import create_task, get_AllTasks, update_task, remove_task
 from flask_cors import CORS, cross_origin
 
@@ -39,6 +39,16 @@ def authenticateUser():
   result = authenticate_user(data["username"], data["password"])
   return jsonify({"result": result})
 
+@app.route("/get_users", methods=["GET"])
+def getUsers():
+  return jsonify(get_users())
+
+@app.route("/update_user", methods=["PUT"])
+def updateUser():
+  data = request.get_json()
+  result = update_user(data["user_id"], data["username"], 
+                       data["email"], data["password"])
+  return jsonify({"result": result})
 
 ### ROUTES FOR TASKS ###
 
