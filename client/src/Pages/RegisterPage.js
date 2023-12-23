@@ -5,6 +5,7 @@ import { useState } from "react";
 import { createUser } from "../API-Services/apiServices";
 import { useNavigate } from "react-router-dom";
 import SnackbarComponent from "../ReusableComponents/SnackbarComponent";
+import Footer from "../ReusableComponents/Footer";
 
 const RegisterTextFields = ({name, value, label, type, onChange}) =>{   
   return(
@@ -72,10 +73,7 @@ export default function RegisterPage() {
             <RegisterTextFields label={"Re-type Password"} type={"password"}/>
             <Button variant="contained" sx={{marginTop:'2%', marginBottom:'3%'}} onClick={()=>{handleSubmit()}}>Submit</Button>
         </div>
-        <div className="footer-fetisher">
-          <p>Information Management 2 Final Project by John Randolf Ribo and John Carl Sabejon</p>
-          <p>CSIT327 Section G5 Handled by Sir Arthur Layese</p>
-        </div>
+        <Footer/>
       </div>
       {snackbar && <SnackbarComponent open={snackbar} onClose={handleSnackbarClose} severity={snackbarSeverity} message={snackbarMessage} />}
     </div>

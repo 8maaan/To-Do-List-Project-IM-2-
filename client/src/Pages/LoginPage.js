@@ -5,6 +5,7 @@ import { useState } from "react";
 import { authenticateUser } from "../API-Services/apiServices";
 import { useNavigate } from "react-router-dom";
 import SnackbarComponent from "../ReusableComponents/SnackbarComponent";
+import Footer from "../ReusableComponents/Footer";
 
 const LoginTextFields = ({name, value, label, type, onChange}) =>{   
   return(
@@ -51,6 +52,7 @@ export default function LoginPage() {
     const authenticate = await authenticateUser(loginCredentials);
     if(authenticate.success){
       localStorage.setItem("uid", authenticate.uid)
+      localStorage.setItem("username",loginCredentials.username);
       handleSnackbarOpen("success", authenticate.message);
       setTimeout(() => {
         navigateTo("/taskspage")
@@ -70,10 +72,7 @@ export default function LoginPage() {
             <LoginTextFields name={"password"} value={loginCredentials.password} label={"Password"} onChange={handleInputChange} type={"password"}/>
             <Button variant="contained" sx={{marginTop:'2%', marginBottom:'3%'}} onClick={()=>{handleSubmit()}}>Log in</Button>
         </div>
-        <div className="footer-fetisher">
-          <p>Information Management 2 Final Project by John Randolf Ribo and John Carl Sabejon</p>
-          <p>CSIT327 Section G5 Handled by Sir Arthur Layese</p>
-        </div>
+        <Footer/>
       </div>
       {snackbar && <SnackbarComponent open={snackbar} onClose={handleSnackbarClose} severity={snackbarSeverity} message={snackbarMessage} />}
     </div>
