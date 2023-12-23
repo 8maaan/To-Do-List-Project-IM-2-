@@ -112,3 +112,8 @@
     display: inline-block;
     margin-top: 1.5%;
 }
+
+.yes-no-bottons{
+    display: flex;
+    gap: 20px;
+}

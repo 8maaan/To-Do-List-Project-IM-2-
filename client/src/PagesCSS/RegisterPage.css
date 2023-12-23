@@ -19,11 +19,11 @@
 
 .registration-form-container p{
     color:#494949;
-    font-size: 21px;
-    font-weight: 600;
+    font-size: 2rem;
+    font-weight: 700;
 }
 
-.registration-form-container .MuiTextField-root{
-    margin-top: 1%;
+.registration-form-container .MuiTextField-root, .MuiButton-root{
+    margin-top: 2%;
     width: 40%;
 }
