@@ -6,6 +6,7 @@ import { getUsers } from "../API-Services/apiServices";
 import { updateUser } from "../API-Services/apiServices";
 import LoadingComponent from "../ReusableComponents/LoadingComponent";
 import SnackbarComponent from "../ReusableComponents/SnackbarComponent";
+import DeleteAccountModal from "../ReusableComponents/MODAL_DeleteAccount";
 
 
 export default function ProfilePage (){
@@ -78,6 +79,12 @@ export default function ProfilePage (){
         setIsEdit(false);
     }
 
+    // to open delete account modal
+    const [openModalCancel, setOpenModalCancel] = useState(false);
+    const handleDeleteAccount = () =>{
+        setOpenModalCancel(true);
+      }
+
     return(
         <div>
             <NavBar/>
@@ -148,12 +155,19 @@ export default function ProfilePage (){
                         This will immediately delete all of your data, including tasks and more. This can't be undone.
                         <br></br>
                         <br></br>
-                        <Button color="error" variant="outlined" style={{width:'28%'}}>
+                        <Button color="error" variant="outlined" style={{width:'28%'}} onClick={handleDeleteAccount}>
                             Delete Account
                         </Button>
                     </div>
                 </div>
             </div>
+
+            {openModalCancel && 
+                <DeleteAccountModal 
+                open={openModalCancel}
+                onClose={() => {setOpenModalCancel(false)}}/>
+            }
+
             {isLoading && <LoadingComponent onClose={stopLoading}/>}
             {snackbar && <SnackbarComponent open={snackbar} onClose={handleSnackbarClose} severity={snackbarSeverity} message={snackbarMessage} />}
         </div>

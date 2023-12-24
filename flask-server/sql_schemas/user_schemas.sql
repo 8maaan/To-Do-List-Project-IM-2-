@@ -136,3 +136,45 @@ LEFT JOIN
     tasks t ON u.user_id = t.user_id
 GROUP BY
     u.user_id, u.username, u.email, u.password;
+
+
+-- DELETE ACCOUNT --
+
+--Delete all associated task
+DELIMITER $$$
+
+CREATE TRIGGER before_delete_user
+BEFORE DELETE ON users FOR EACH ROW
+BEGIN
+  -- Delete tasks associated with the user being deleted
+  DELETE FROM tasks WHERE user_id = OLD.user_id;
+END;
+$$$
+
+DELIMITER ;
+
+
+--Delete Account Procedure
+
+DELIMITER $$$
+
+CREATE PROCEDURE delete_account(
+	IN user_id_to_delete INT
+)
+BEGIN
+  DECLARE rowCount INT;
+
+  -- Check if the user exists
+  SELECT COUNT(*) INTO rowCount FROM users WHERE user_id = user_id_to_delete;
+
+  IF rowCount > 0 THEN
+    -- User exists, proceed with deletion
+    DELETE FROM users WHERE user_id = user_id_to_delete;
+    SELECT CONCAT('User id ', user_id_to_delete, ' has been deleted') AS result;
+  ELSE
+    -- User does not exist
+    SELECT CONCAT('User id ', user_id_to_delete, ' does not exist') AS result;
+  END IF;
+END $$$
+
+DELIMITER ;

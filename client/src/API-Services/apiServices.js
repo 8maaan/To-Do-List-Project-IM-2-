@@ -109,3 +109,14 @@ export const updateUser = async (user) => {
     return { success: false, message: `${error}` };
   }
 };
+
+export const deleteUser = async (user_id) => {
+  try{
+    const response = await axios.delete(`http://127.0.0.1:5000/delete_user/${user_id}`);
+    const result = response.data.result; // assuming the server sends { "result": "message" }
+    console.log(result);
+    return { success: true, message: result};
+  }catch (error) {
+    throw new Error('Error, could not find user.', error);
+  }
+};

@@ -5,7 +5,7 @@ POST {{host}}/create_user
 Content-Type: application/json
 
 {
-    "username": "test12356151",
+    "username": "johnu121",
     "password": "admin123",
     "email": "gg@ez.com"
 }
@@ -15,8 +15,8 @@ POST {{host}}/authenticate_user
 Content-Type: application/json
 
 {
-    "username": "usertest",
-    "password": "12345"
+    "username": "johnu121",
+    "password": "admin123"
 }
 
 ### Get all users
@@ -28,10 +28,10 @@ PUT  {{host}}/update_user
 Content-Type: application/json
 
 {
-    "user_id": 1,
+    "user_id": 5,
     "username": "proper_username",
     "email": "admin@gmail.com",
-    "password": "123"
+    "password": "12365"
 }
 
 ### Create a task
@@ -39,7 +39,7 @@ POST {{host}}/create_task
 Content-Type: application/json
 
 {
-    "user_id": 1,
+    "user_id": 5,
     "category_id": 2,
     "task_name": "IM Project",
     "description": "This is a task description.",
@@ -78,16 +78,16 @@ GET {{host}}/users/1
 Content-Type: application/json
 
 ### Update a user
-PUT {{host}}/users/1
+PUT {{host}}/users/6
 
 Content-Type: application/json
 {
-    "Name": "Admin",
-    "email": "admin@local.com",
-    "username": "admin",
-    "password": "123"
+    "Name": "udpate",
+    "email": "admin@update.com",
+    "username": "udpate",
+    "password": "update"
 }
 ### Delete a user
-DELETE {{host}}/users/1
+DELETE {{host}}/delete_user/12322
 Content-Type: application/json
 

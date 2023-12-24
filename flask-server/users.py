@@ -22,6 +22,12 @@ def authenticate_user(username, password):
   cursor = execute(query, (username, password))
   row = cursor.fetchone()
   return row
+
+def delete_user(user_id):
+  query = "CALL delete_account(%s)"
+  cursor = execute(query, (user_id,))
+  row = cursor.fetchone()
+  return row
   
   
   
