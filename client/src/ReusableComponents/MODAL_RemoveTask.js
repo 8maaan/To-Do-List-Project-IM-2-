@@ -69,7 +69,7 @@ const CancelTaskModal = ({ open, onClose, currentTask, newTaskStatus }) => {
             <br></br>
             <div className='yes-no-bottons'>
               <Button variant='contained' onClick={()=>{handleOnSubmit()}}>Yes</Button>
-              <Button variant='contained' onClick={onClose}>No</Button>
+              <Button color="error" variant='contained' onClick={onClose}>No</Button>
             </div>
           </div>
         </Box>

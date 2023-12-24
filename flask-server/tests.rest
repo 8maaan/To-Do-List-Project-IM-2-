@@ -41,7 +41,7 @@ Content-Type: application/json
 {
     "user_id": 5,
     "category_id": 2,
-    "task_name": "IM Project",
+    "task_name": "",
     "description": "This is a task description.",
     "due_date": "2023-12-21"
 }

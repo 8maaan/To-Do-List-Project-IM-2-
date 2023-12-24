@@ -5,6 +5,11 @@ export const createTasks = async (task) => {
   try {
     const response = await axios.post("http://127.0.0.1:5000/create_task", task);
     const result = response.data.result; // assuming the server sends { "result": "message" }
+
+    if (result.includes("All fields must be filled.")) {
+      return { success: false, message: result };
+    }
+    
     return { success: true, message: result };
 
   } catch (error) {

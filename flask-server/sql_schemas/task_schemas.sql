@@ -44,12 +44,17 @@ CREATE PROCEDURE create_task(
     IN p_due_date DATETIME
 )
 BEGIN
-    -- Insert the new task
-    INSERT INTO tasks (user_id, category_id, task_name, description, due_date)
-    VALUES (p_user_id, p_category_id, p_task_name, p_description, p_due_date);
+     -- Check for empty parameters
+    IF p_user_id IS NULL OR p_category_id IS NULL OR LENGTH(p_task_name) = 0 OR LENGTH(p_description) = 0 OR p_due_date IS NULL THEN
+        SELECT 'All fields must be filled.' AS message;
+    ELSE
+		-- Insert the new task
+        INSERT INTO tasks (user_id, category_id, task_name, description, due_date)
+        VALUES (p_user_id, p_category_id, p_task_name, p_description, p_due_date);
 
-    -- Set success message
-    SELECT 'User created successfully.' AS message;
+        -- Set success message
+        SELECT 'Task created successfully.' AS message;
+    END IF;
 END $$$
 
 DELIMITER ;

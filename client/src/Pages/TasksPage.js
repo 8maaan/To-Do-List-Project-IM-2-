@@ -12,6 +12,7 @@ import TaskModal from "../ReusableComponents/MODAL_UpdateTask";
 import CanacelTaskModal from "../ReusableComponents/MODAL_RemoveTask";
 import { useNavigate } from "react-router";
 import NavBar from "../ReusableComponents/NavBar"
+import SnackbarComponent from "../ReusableComponents/SnackbarComponent";
 
 
 const TaskTextField = ({name, label, type, onChange}) =>{
@@ -26,6 +27,7 @@ export default function TasksPage() {
   // Functions and components for Create Task container
   const [task, setTask] = useState([]);
   const [uid] = useState(parseInt(localStorage.getItem("uid")));
+  const activeTasks = task.filter((task) => task.status === "In progress");
 
   const [createTask, setCreateTask] = useState({
     user_id: uid,
@@ -59,24 +61,34 @@ export default function TasksPage() {
     getData();
   }, [uid]);
 
-  // const clearFields = () =>{
-  //   setCreateTask({
-  //     category_id: "",
-  //     task_name: " ",
-  //     description: " ",
-  //     due_date: ""
-  //   })  
-  // }
+  const [snackbar, setSnackbar] = useState(false);
+  const [snackbarSeverity, setSnackbarSeverity] = useState('');
+  const [snackbarMessage, setSnackbarMessage] = useState('');
+  const handleSnackbarOpen = (severity, message) => {
+    setSnackbarSeverity(severity);
+    setSnackbarMessage(message);
+    setSnackbar(true);
+  }
+
+  const handleSnackbarClose = (event, reason) => {
+    if (reason === 'clickaway') {
+      return;
+    }
+    setSnackbar(false);
+  };
 
   const navigateTo = useNavigate();
   const handleOnSubmit = async () => {
     // console.log(createTask);
     const insertTask = await createTasks(createTask);
     if(insertTask.success){
-      alert(insertTask.message);
-      navigateTo(0);
+      
+      handleSnackbarOpen("success", insertTask.message)
+      setTimeout(() => {
+        navigateTo(0);
+      }, 800);
     }else{
-      alert(insertTask.message);
+      handleSnackbarOpen("error", insertTask.message)
     }
   };
 
@@ -147,6 +159,7 @@ export default function TasksPage() {
 
         <div className="show-tasks-container">
           <p style={{marginTop:'5.5%', fontWeight: '600', fontSize: '21px', color: '#494949'}}>ToDo List</p>
+          <p style={{marginTop:'5%', fontSize:'18px', color: 'gray'}}>{activeTasks.length === 0 ? "No Active Task/s Available" : null}</p>
           {task.map((task, id) => (task.status === 'In progress' &&
             <div key={id} className="task-container">
               <div className="assignment-icon-alignment">
@@ -192,6 +205,7 @@ export default function TasksPage() {
           }
         </div>
       </div>
+      {snackbar && <SnackbarComponent open={snackbar} onClose={handleSnackbarClose} severity={snackbarSeverity} message={snackbarMessage} />}
     </div>
   );
 }

@@ -4,7 +4,6 @@ import { Link, useNavigate } from 'react-router-dom';
 import {  Divider, Menu, MenuItem, } from '@mui/material';
 import LogoutIcon from '@mui/icons-material/Logout';
 import AccountCircleIcon from '@mui/icons-material/AccountCircle';
-import HistoryIcon from '@mui/icons-material/History';
 
 const NavBar = () => {
     const [uid] = useState(parseInt(localStorage.getItem("uid")));
