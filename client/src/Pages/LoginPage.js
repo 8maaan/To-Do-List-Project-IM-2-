@@ -71,6 +71,9 @@ export default function LoginPage() {
             <LoginTextFields name={"username"} value={loginCredentials.username} label={"Username"} onChange={handleInputChange}/>
             <LoginTextFields name={"password"} value={loginCredentials.password} label={"Password"} onChange={handleInputChange} type={"password"}/>
             <Button variant="contained" sx={{marginTop:'2%', marginBottom:'3%'}} onClick={()=>{handleSubmit()}}>Log in</Button>
+            <div className="link-to-other">
+              <p>Don’t have an account? <span><a href="/">Sign up</a></span></p>
+            </div>
         </div>
         <Footer/>
       </div>

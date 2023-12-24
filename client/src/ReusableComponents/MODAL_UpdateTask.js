@@ -62,7 +62,7 @@ const MODAL_UpdateTaskModal = ({ open, onClose, currentTask }) => {
   return (
     <Modal
       open={open}
-      sx={{ '& .MuiBackdrop-root': { backgroundColor: 'transparent' } }}
+      sx={{ '& .MuiBackdrop-root': { backgroundColor: '#49494988' } }}
       onClose={onClose}
       aria-labelledby="modal-modal-title"
       aria-describedby="modal-modal-description"

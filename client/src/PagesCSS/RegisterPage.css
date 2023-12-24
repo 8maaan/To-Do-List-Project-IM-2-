@@ -28,6 +28,22 @@
     width: 40%;
 }
 
+.link-to-other{
+    border-top: 1px solid #D3D3D3;
+    width: 40%;
+    padding-top: 1rem;
+    margin: auto;
+}
+
+.link-to-other p{
+    font-weight: 100;
+    font-size: 1rem;
+}
+
+.link-to-other a{
+    text-decoration: underline;
+}
+
 /* .footer-fetisher{
     margin-top: auto;
     border-top: 1px solid #D3D3D3;

@@ -62,7 +62,7 @@ const NavBar = () => {
                 <div className='navi-left'>
                     <h2>ToDoDis</h2>
                     <Link to='/taskspage'><h3>Home</h3></Link>
-                    {/* <Link to='/history'><h3>History</h3></Link> */}
+                    <Link to='/history'><h3>Task History</h3></Link>
                 </div>
                 <div className='navi-right'>
                     {uid ? (
@@ -113,17 +113,10 @@ const NavBar = () => {
                                     </MenuItem>
                                 </Link>
 
-                                <Link to ='/history'>
+                                {/* <Link to ='/history'>
                                     <MenuItem onClick={handleClose}>
-                                        {/* <AccountCircleIcon style={{fill: "#0075BE"}}/>  &nbsp;  */}
                                         <HistoryIcon style={{fill: "#0075BE"}}/>  &nbsp; 
                                         Task History
-                                    </MenuItem>
-                                </Link>
-
-                                {/* <Link to ='/transactions'>
-                                    <MenuItem onClick={handleClose}>
-                                        <PaidIcon style={{fill: "#0075BE"}}/>  &nbsp; Transactions
                                     </MenuItem>
                                 </Link> */}
 

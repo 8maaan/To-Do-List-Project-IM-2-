@@ -72,6 +72,9 @@ export default function RegisterPage() {
             <RegisterTextFields name={"password"} value={user.password} label={"Password"} type={"password"} onChange={handleInputChange}/>
             <RegisterTextFields label={"Re-type Password"} type={"password"}/>
             <Button variant="contained" sx={{marginTop:'2%', marginBottom:'3%'}} onClick={()=>{handleSubmit()}}>Submit</Button>
+            <div className="link-to-other">
+              <p>Already signed up? <span><a href="/login">Go to login</a></span></p>
+            </div>
         </div>
         <Footer/>
       </div>
