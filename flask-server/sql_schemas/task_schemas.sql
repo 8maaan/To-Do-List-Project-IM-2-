@@ -15,8 +15,9 @@ CREATE TABLE `tasks` (
   `category_id` int DEFAULT NULL,
   `task_name` varchar(255) NOT NULL,
   `description` text,
-  `due_date` date DEFAULT NULL,
+  `due_date` datetime DEFAULT NULL,
   `status` varchar(20) DEFAULT 'In progress',
+  `completion_date` datetime DEFAULT NULL,
   PRIMARY KEY (`task_id`),
   KEY `user_id` (`user_id`),
   KEY `category_id` (`category_id`),
@@ -131,3 +132,19 @@ FROM
     tasks t
     JOIN users u ON t.user_id = u.user_id
     JOIN task_categories c ON t.category_id = c.category_id;
+
+/* --- TRIGGERS --- */
+
+DELIMITER $$$
+
+CREATE TRIGGER TaskBeforeStatusChangeTrigger
+BEFORE UPDATE ON tasks
+FOR EACH ROW
+BEGIN
+    -- Check if the status is being updated to "Completed" or "Cancelled"
+    IF (NEW.status = 'Completed' OR NEW.status = 'Cancelled') AND OLD.status NOT IN ('Completed', 'Cancelled') THEN
+        SET NEW.completion_date = NOW();
+    END IF;
+END $$$
+
+DELIMITER ;
