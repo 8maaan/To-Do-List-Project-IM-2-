@@ -33,19 +33,21 @@ const DeleteAccountModal = ({open, onClose}) => {
     // for delete account
     const navigateTo = useNavigate();
     const handleDeleteAccount = async () =>{
-        const deleteaccount = await deleteUser(uid);
-        if(deleteaccount.success){
-            setTimeout(() => {
-                handleSnackbarOpen("success", deleteaccount.message)
-                navigateTo("/login")
-            }, 1500);
-        }else{
-            setTimeout(() => {
-                handleSnackbarOpen("error", deleteaccount.message)
-                navigateTo("/login")
-            }, 800);
-        }
-    }
+      setIsLoading(true);
+      const deleteaccount = await deleteUser(uid);
+      if(deleteaccount.success){
+          setTimeout(() => {
+              handleSnackbarOpen("success", deleteaccount.message)
+          }, 800);
+          setTimeout(() => {
+            navigateTo("/login")
+          }, 1800);
+      }else{
+          setTimeout(() => {
+              handleSnackbarOpen("error", deleteaccount.message)
+          }, 800);
+      }
+  }
 
   return (
     <Modal

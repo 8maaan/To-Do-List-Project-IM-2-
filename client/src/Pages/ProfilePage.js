@@ -87,8 +87,8 @@ export default function ProfilePage (){
 
     return(
         <div>
-            <NavBar/>
             <div className="profile-page-container">
+            <NavBar/>
                 <br></br>
                 <div className="profile-page-info-container">
                     <div className="profile-photo-section">

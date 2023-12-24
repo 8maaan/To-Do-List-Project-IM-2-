@@ -127,7 +127,8 @@ SELECT
     t.due_date,
     t.status,
     u.username AS user_username,
-    c.category_name
+    c.category_name,
+    t.completion_date
 FROM
     tasks t
     JOIN users u ON t.user_id = u.user_id

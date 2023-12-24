@@ -19,6 +19,7 @@ export default function TaskHistoryPage(){
             );
 
             const reversedFilteredTasks = filteredTasks.reverse();
+            console.log(reversedFilteredTasks);
             setTask(reversedFilteredTasks);
             console.log(result.message);
           } else {
@@ -46,6 +47,9 @@ export default function TaskHistoryPage(){
                             <p>Category: {task.category_name}</p>
                             <p>Description: {task.description}</p>
                             <p>Due Date: {task.due_date}</p>
+                            {task.completion_date !== null && (
+                                <p style={{fontWeight: '700'}}>Task {task.status}: {task.completion_date}</p>
+                            )}
                         </div>
 
                         <div className="task-action-buttons-container-history">
